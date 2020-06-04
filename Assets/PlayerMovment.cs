@@ -7,7 +7,7 @@ public class PlayerMovment : MonoBehaviour
     // Start is called before the first frame update
 
     public float moveSpeed = 5;
-    public float maxMoveSpeed = 15;
+    public float maxMoveSpeed = 50;
     CharacterController body;
     // Start is called before the first frame update
     void Start()
@@ -30,12 +30,12 @@ public class PlayerMovment : MonoBehaviour
         }
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        if (Input.GetAxis("Horizontal") > 0)
+     /*   if (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") > 1)
         {
             print("moving horzontal");
             moveSpeed += 1;
         }
-        if (Input.GetAxis("Vertical") < 0 && Input.GetAxis("Vertical") > 1)
+        if (Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 1)
         {
             print("moving Vertical");
             moveSpeed += 1;
@@ -45,11 +45,11 @@ public class PlayerMovment : MonoBehaviour
         {
             moveSpeed = maxMoveSpeed;
         }
-        if (Input.GetAxis("Vertical") <= 0 && Input.GetAxis("Horizontal") <= 0)
+        if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0)
         {
             moveSpeed = 5;
         }
-        
+       */ 
         Vector3 moveDis = transform.forward * v * moveSpeed;
         moveDis += transform.right * h * moveSpeed;
         body.SimpleMove(moveDis);
