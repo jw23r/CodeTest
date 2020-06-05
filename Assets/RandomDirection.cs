@@ -11,7 +11,7 @@ public class RandomDirection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = Random.Range(randomMin, randomMax);
+        speed = Random.Range(randomMin, randomMax) + Random.Range(randomMin, randomMax);
         asteroid = GetComponent<Rigidbody>();
 
         asteroid.AddForce(transform.forward * speed * Time.deltaTime, ForceMode.Impulse);

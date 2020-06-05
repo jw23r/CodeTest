@@ -8,6 +8,9 @@ public class SpawnEnemy : MonoBehaviour
     public GameObject ball;
     float time = 0;
     public float roationSpeed = 20;
+    float randomXOffset;
+    float randomYOffset;
+    int i = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +21,16 @@ public class SpawnEnemy : MonoBehaviour
     void Update()
     {
         transform.Rotate(Vector3.up * roationSpeed * Time.deltaTime);
-     
+        randomXOffset = Random.Range(-50, 50);
+        randomYOffset = Random.Range(-50, 50);
+
+        Vector3 offset = new Vector3(randomXOffset, 0, randomYOffset);
         time += Time.deltaTime;
-        if (time > 2) {
-            Instantiate(ball, balldir.position, balldir.rotation);
+        if ( i < 10 && time > .3f) 
+        {
+            i++;
+            print(i);
+            Instantiate(ball, balldir.position + offset, balldir.rotation);
             time = 0;
         }
     }
