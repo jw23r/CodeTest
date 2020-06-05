@@ -8,23 +8,37 @@ public class PlayerMovment : MonoBehaviour
 
      float moveSpeedVertical = 0;
     float moveSpeedHorizontal = 0;
-
     public float maxFowardMoveSpeed = 50;
     public float maxBackWardMoveSpeed = 50;
     public float velocity;
-
+   public Transform projectileSpawn;
+   public GameObject bullet;
     Rigidbody player;
-   // CharacterController body;
+ 
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<Rigidbody>();
 
-       // body = GetComponent<CharacterController>();
+       
     }
 
     // Update is called once per frame
     void Update()
+    {
+
+        if (Input.GetKeyUp("space"))
+        {
+            print("space");
+            Instantiate(bullet, projectileSpawn.position, projectileSpawn.rotation);
+
+        }
+        PlayerRotation();
+        PlayerVelocity("Vertical", moveSpeedVertical, Vector3.forward);
+        PlayerVelocity("Horizontal", moveSpeedHorizontal, Vector3.right);
+    }
+
+    private void PlayerRotation()
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -36,22 +50,6 @@ public class PlayerMovment : MonoBehaviour
             transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
 
         }
-
-        /*   if (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") > 1)
-            {
-                print("moving horzontal");
-                moveSpeed += 1;
-            }*/
-        PlayerVelocity("Vertical", moveSpeedVertical,Vector3.forward);
-        PlayerVelocity("Horizontal", moveSpeedHorizontal, Vector3.right);
-
-
-
-        /*
-        Vector3 moveDis = transform.forward * v * moveSpeed;
-        moveDis += transform.right * h * moveSpeed;
-        body.SimpleMove(moveDis);
-    */
     }
 
     private void PlayerVelocity(string dir, float speed, Vector3 forceDir)
