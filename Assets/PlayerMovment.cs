@@ -26,7 +26,7 @@ public class PlayerMovment : MonoBehaviour
 
 
             transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
-
+            
         }
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
