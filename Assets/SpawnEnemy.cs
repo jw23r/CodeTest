@@ -29,7 +29,7 @@ public class SpawnEnemy : MonoBehaviour
         if ( i < 10 && time > .3f) 
         {
             i++;
-            print(i);
+
             Instantiate(ball, balldir.position + offset, balldir.rotation);
             time = 0;
         }

@@ -6,13 +6,21 @@ public class PlayerMovment : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public float moveSpeed = 5;
-    public float maxMoveSpeed = 50;
-    CharacterController body;
+     float moveSpeedVertical = 0;
+    float moveSpeedHorizontal = 0;
+
+    public float maxFowardMoveSpeed = 50;
+    public float maxBackWardMoveSpeed = 50;
+    public float velocity;
+
+    Rigidbody player;
+   // CharacterController body;
     // Start is called before the first frame update
     void Start()
     {
-        body = GetComponent<CharacterController>();
+        player = GetComponent<Rigidbody>();
+
+       // body = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -26,33 +34,66 @@ public class PlayerMovment : MonoBehaviour
 
 
             transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
-            
-        }
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-     /*   if (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") > 1)
-        {
-            print("moving horzontal");
-            moveSpeed += 1;
-        }
-        if (Input.GetAxis("Vertical") < 0 || Input.GetAxis("Vertical") > 1)
-        {
-            print("moving Vertical");
-            moveSpeed += 1;
 
         }
-        if(moveSpeed > maxMoveSpeed)
-        {
-            moveSpeed = maxMoveSpeed;
-        }
-        if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0)
-        {
-            moveSpeed = 5;
-        }
-       */ 
+
+        /*   if (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") > 1)
+            {
+                print("moving horzontal");
+                moveSpeed += 1;
+            }*/
+        PlayerVelocity("Vertical", moveSpeedVertical,Vector3.forward);
+        PlayerVelocity("Horizontal", moveSpeedHorizontal, Vector3.right);
+
+
+
+        /*
         Vector3 moveDis = transform.forward * v * moveSpeed;
         moveDis += transform.right * h * moveSpeed;
         body.SimpleMove(moveDis);
+    */
+    }
+
+    private void PlayerVelocity(string dir, float speed, Vector3 forceDir)
+    {
+        if (Input.GetAxis(dir) > 0)
+        {
+            if (speed < 0)
+            {
+                speed = 0;
+            }
+
+            speed += velocity;
+            print(moveSpeedVertical);
+
+        }
+        if (Input.GetAxis(dir) < 0)
+        {
+            if (speed > 0)
+            {
+                speed = 0;
+            }
+
+            speed -= velocity;
+            //print(moveSpeed);
+
+        }
+        if (speed > 10)
+        {
+            speed = maxFowardMoveSpeed;
+
+        }
+        if (speed < -10)
+        {
+            speed = maxBackWardMoveSpeed;
+        }
+        if (Input.GetAxis(dir) == 0)
+        {
+            speed = 0;
+        }
+
+        player.AddForce(forceDir * speed * Time.deltaTime, ForceMode.VelocityChange);
+        
     }
 }
     
