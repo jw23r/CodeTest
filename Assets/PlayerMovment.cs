@@ -33,9 +33,17 @@ public class PlayerMovment : MonoBehaviour
             Instantiate(bullet, projectileSpawn.position, projectileSpawn.rotation);
 
         }
-        PlayerRotation();
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            transform.Rotate(Vector3.up);
+        }
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            transform.Rotate(-Vector3.up);
+        }
+        //   PlayerRotation();
         PlayerVelocity("Vertical", moveSpeedVertical, Vector3.forward);
-        PlayerVelocity("Horizontal", moveSpeedHorizontal, Vector3.right);
+      //  PlayerVelocity("Horizontal", moveSpeedHorizontal, Vector3.right);
     }
 
     private void PlayerRotation()
@@ -60,12 +68,12 @@ public class PlayerMovment : MonoBehaviour
             {
                 speed = 0;
             }
-
             speed += velocity;
             print(moveSpeedVertical);
+            player.velocity = transform.forward * speed;
 
         }
-        if (Input.GetAxis(dir) < 0)
+    /*    if (Input.GetAxis(dir) < 0)
         {
             if (speed > 0)
             {
@@ -75,7 +83,7 @@ public class PlayerMovment : MonoBehaviour
             speed -= velocity;
             //print(moveSpeed);
 
-        }
+        }*/
         if (speed > 10)
         {
             speed = maxFowardMoveSpeed;
@@ -90,7 +98,7 @@ public class PlayerMovment : MonoBehaviour
             speed = 0;
         }
 
-        player.AddForce(forceDir * speed * Time.deltaTime, ForceMode.VelocityChange);
+     //   player.AddForce(forceDir * speed * Time.deltaTime, ForceMode.VelocityChange);
         
     }
 }

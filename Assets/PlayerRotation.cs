@@ -13,17 +13,14 @@ public class PlayerRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-   
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            transform.Rotate(Vector3.up);
+        }
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            transform.Rotate(-Vector3.up);
+        }
 
-            if (Physics.Raycast(ray, out hit, 100))
-            {
-
-            
-                transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
-            
-            }
-       
     }
 }
