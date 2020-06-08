@@ -16,7 +16,7 @@ public class ReturnToScreen : MonoBehaviour
     {
         if (transform.position.x > 98) transform.position = new Vector3(-96,transform.position.y,transform.position.z);
         if (transform.position.x < -98) transform.position = new Vector3(96,transform.position.y,transform.position.z);
-        if (transform.position.z < -55) transform.position = new Vector3(transform.position.x, transform.position.y, 53);
+        if (transform.position.z < -54) transform.position = new Vector3(transform.position.x, transform.position.y, 53);
         if (transform.position.z > 55) transform.position = new Vector3(transform.position.x, transform.position.y, -52);
     }
 }
