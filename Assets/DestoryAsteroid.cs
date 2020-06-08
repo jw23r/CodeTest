@@ -15,8 +15,20 @@ public class DestoryAsteroid : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collider)
     {
-        Destroy(gameObject);
+        if (collider.transform.tag == "Bullet")
+        {
+            HUDController.score += 10;
+            Destroy(gameObject);
+
+        }
+        if (collider.transform.tag == "Player")
+        {
+            HUDController.lives -= 1;
+            Destroy(gameObject);
+
+        }
+
     }
 }

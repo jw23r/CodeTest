@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
     {
         if (collider.transform.tag == "asteroid")
         {
-            Destroy(collider);
+        
             Destroy(gameObject);
         }
         

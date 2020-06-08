@@ -6,59 +6,66 @@ public class PlayerMovment : MonoBehaviour
 {
     // Start is called before the first frame update
 
-     float moveSpeedVertical = 0;
+    float moveSpeedVertical = 0;
     float moveSpeedHorizontal = 0;
     public float maxFowardMoveSpeed = 50;
     public float maxBackWardMoveSpeed = 50;
     public float velocity;
-   public Transform projectileSpawn;
-   public GameObject bullet;
+    public float turnSpeed;
+    public Transform projectileSpawn;
+    public GameObject bullet;
     Rigidbody player;
- 
+    public ParticleSystem particles;
+    public AudioSource rockets;
+    public AudioSource shooting;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<Rigidbody>();
 
-       
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        Shooting();
 
+        RotatePlayer();
+     
+        PlayerVelocity("Vertical", moveSpeedVertical, Vector3.forward);
+
+
+    }
+
+    private void RotatePlayer()
+    {
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            transform.Rotate(Vector3.up * turnSpeed);
+        }
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            transform.Rotate(-Vector3.up * turnSpeed);
+        }
+    }
+
+    private void Shooting()
+    {
         if (Input.GetKeyUp("space"))
         {
             print("space");
             Instantiate(bullet, projectileSpawn.position, projectileSpawn.rotation);
-
-        }
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            transform.Rotate(Vector3.up);
-        }
-        if (Input.GetAxis("Horizontal") < 0)
-        {
-            transform.Rotate(-Vector3.up);
-        }
-        //   PlayerRotation();
-        PlayerVelocity("Vertical", moveSpeedVertical, Vector3.forward);
-      //  PlayerVelocity("Horizontal", moveSpeedHorizontal, Vector3.right);
-    }
-
-    private void PlayerRotation()
-    {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit, 100))
-        {
-
-
-            transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
+            if (!shooting.isPlaying) shooting.Play();
 
         }
     }
+
+  
 
     private void PlayerVelocity(string dir, float speed, Vector3 forceDir)
     {
@@ -69,38 +76,30 @@ public class PlayerMovment : MonoBehaviour
                 speed = 0;
             }
             speed += velocity;
-            print(moveSpeedVertical);
+            // print(moveSpeedVertical);
             player.velocity = transform.forward * speed;
+            if (!particles.isPlaying) particles.Play();
+            if (!rockets.isPlaying) rockets.Play();
+
 
         }
-    /*    if (Input.GetAxis(dir) < 0)
+        else
         {
-            if (speed > 0)
-            {
-                speed = 0;
-            }
+            speed = 0;
+            if (particles.isPlaying) particles.Stop();
 
-            speed -= velocity;
-            //print(moveSpeed);
 
-        }*/
+
+        }
+
         if (speed > 10)
         {
             speed = maxFowardMoveSpeed;
 
         }
-        if (speed < -10)
-        {
-            speed = maxBackWardMoveSpeed;
-        }
-        if (Input.GetAxis(dir) == 0)
-        {
-            speed = 0;
-        }
 
-     //   player.AddForce(forceDir * speed * Time.deltaTime, ForceMode.VelocityChange);
-        
+
     }
 }
-    
+
 
