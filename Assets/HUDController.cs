@@ -21,7 +21,9 @@ public class HUDController : MonoBehaviour
     void Update()
     {
         textScore.text = $"SCORE:{(int)score}";
-        textLives.text = $"Lives:{(int)lives}";
+
+        print(score);
+        textLives.text = $"LIVES:{(int)lives}";
 
     }
 }

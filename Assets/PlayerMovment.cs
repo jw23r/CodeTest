@@ -97,8 +97,24 @@ public class PlayerMovment : MonoBehaviour
             speed = maxFowardMoveSpeed;
 
         }
+       
 
-
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.transform.tag == "asteroid")
+        {
+            transform.position = new Vector3(0, 0, 0);
+        }
+        if (other.transform.tag == "Enemy")
+        {
+            transform.position = new Vector3(0, 0, 0);
+        }
+        if (other.transform.tag == "EnemyBullet")
+        {
+            HUDController.lives -= 1;
+            transform.position = new Vector3(0, 0, 0);
+        }
     }
 }
 
