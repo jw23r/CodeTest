@@ -37,8 +37,13 @@ public class EnemyShip : MonoBehaviour
     {
         if(other.transform.tag == "Bullet")
         {
+            HUDController.numberOfEnemys -= 1;
             HUDController.score += 35;
             Destroy(gameObject);
+        }
+        if(other.transform.tag == "Player")
+        {
+            HUDController.lives -= 1;
         }
     }
 }

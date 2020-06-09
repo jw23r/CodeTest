@@ -38,7 +38,7 @@ public class PlayerMovment : MonoBehaviour
         RotatePlayer();
      
         PlayerVelocity("Vertical", moveSpeedVertical, Vector3.forward);
-
+        if (HUDController.lives < 0) Destroy(gameObject);
 
     }
 

@@ -20,13 +20,15 @@ public class DestoryAsteroid : MonoBehaviour
         if (collider.transform.tag == "Bullet")
         {
             HUDController.score += 10;
+            HUDController.numberOfEnemys -= 1;
             Destroy(gameObject);
 
         }
         if (collider.transform.tag == "Player")
         {
             HUDController.lives -= 1;
-            Destroy(gameObject);
+
+    
 
         }
 

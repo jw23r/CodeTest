@@ -10,6 +10,7 @@ public class SpawnEnemy : MonoBehaviour
     public float roationSpeed = 20;
     float randomXOffset;
     float randomYOffset;
+    public int numOfSpawns;
     int i = 0;
     // Start is called before the first frame update
     void Start()
@@ -26,10 +27,10 @@ public class SpawnEnemy : MonoBehaviour
 
         Vector3 offset = new Vector3(randomXOffset, 0, randomYOffset);
         time += Time.deltaTime;
-        if ( i < 10 && time > .3f) 
+        if ( i < numOfSpawns && time > .3f) 
         {
             i++;
-
+            HUDController.numberOfEnemys++;
             Instantiate(ball, balldir.position + offset, balldir.rotation);
             time = 0;
         }

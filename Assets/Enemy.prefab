@@ -330,9 +330,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aim: {fileID: 5875550342009971746}
   bullet: {fileID: 2729386858891480803, guid: 74ae10fe98add454e8b593b2f8b66366, type: 3}
-  coolDown: 3
+  coolDown: 15
   coolDownMin: 1
-  coolDownMax: 5
+  coolDownMax: 15
   shoot: {fileID: 5875550341474744249}
 --- !u!114 &-1457588004097254664
 MonoBehaviour:
