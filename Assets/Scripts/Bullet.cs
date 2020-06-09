@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
     /// <param name="collider"></param>
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.transform.tag == "asteroid" || collider.transform.tag == "Enemy")
+        if (collider.transform.tag == "asteroid" )
         {
         
             Destroy(gameObject);
