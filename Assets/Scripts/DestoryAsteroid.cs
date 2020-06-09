@@ -5,16 +5,11 @@ using UnityEngine;
 public class DestoryAsteroid : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   /// <summary>
+   /// if gets hit by player bullet it gets destroyed and adds 10 points to score
+   /// if hits player they lose 1 life
+   /// </summary>
+   /// <param name="collider"></param>
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.transform.tag == "Bullet")

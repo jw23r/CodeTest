@@ -6,22 +6,25 @@ public class PlayerMovment : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    float moveSpeedVertical = 0;
-    float moveSpeedHorizontal = 0;
-    public float maxFowardMoveSpeed = 50;
-    public float maxBackWardMoveSpeed = 50;
-    public float velocity;
-    public float turnSpeed;
-    public Transform projectileSpawn;
-    public GameObject bullet;
-    Rigidbody player;
-    public ParticleSystem particles;
-    public AudioSource rockets;
-    public AudioSource shooting;
+    float moveSpeedVertical = 0;// how fast object moves vertical
+ 
+    public float maxFowardMoveSpeed = 50;// how fast the speed can get to
+    
+    public float velocity;//keeps track of velicty
+    public float turnSpeed;// how fast player can turn left and right
+    public Transform projectileSpawn;// dir used to spawn bullet
+    public GameObject bullet;// the object that gets spawned when player shoots
+    Rigidbody player;//the ridge body of the player used for adding force
+    public ParticleSystem particles;// the players particels
+    public AudioSource rockets;//sound when moving foward
+    public AudioSource shooting;//sound when shooting
 
 
 
     // Start is called before the first frame update
+    /// <summary>
+    /// gets the players ridgebody on the game object
+    /// </summary>
     void Start()
     {
         player = GetComponent<Rigidbody>();
@@ -29,7 +32,11 @@ public class PlayerMovment : MonoBehaviour
 
 
     }
-
+    /// <summary>
+    /// updates if the player is shooting 
+    /// rootates the player
+    /// moves the player
+    /// </summary>
     // Update is called once per frame
     void Update()
     {
@@ -38,7 +45,7 @@ public class PlayerMovment : MonoBehaviour
         RotatePlayer();
      
         PlayerVelocity("Vertical", moveSpeedVertical, Vector3.forward);
-        if (HUDController.lives < 0) Destroy(gameObject);
+
 
     }
 
@@ -53,20 +60,29 @@ public class PlayerMovment : MonoBehaviour
             transform.Rotate(-Vector3.up * turnSpeed);
         }
     }
-
+    /// <summary>
+    /// creates a bullet when the player lets go of  space
+    /// when the player lets go of  space turns on audio source
+    /// </summary>
     private void Shooting()
     {
         if (Input.GetKeyUp("space"))
         {
-            print("space");
+            //print("space");
             Instantiate(bullet, projectileSpawn.position, projectileSpawn.rotation);
             if (!shooting.isPlaying) shooting.Play();
 
         }
     }
 
-  
 
+    /// <summary>
+    /// moves the player in the entered direction and uses the given axis to check whtehr to move or not
+    /// playes rocket sound when adding velocity
+    /// </summary>
+    /// <param name="dir"></param> what axis we are looking for to move the object
+    /// <param name="speed"></param> how fast the player will move
+    /// <param name="forceDir"></param> what direction we want the player to movein
     private void PlayerVelocity(string dir, float speed, Vector3 forceDir)
     {
         if (Input.GetAxis(dir) > 0)
@@ -92,7 +108,7 @@ public class PlayerMovment : MonoBehaviour
 
         }
 
-        if (speed > 10)
+        if (speed > maxFowardMoveSpeed)
         {
             speed = maxFowardMoveSpeed;
 

@@ -5,13 +5,11 @@ using UnityEngine;
 public class ReturnToScreen : MonoBehaviour
 {
  
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
+    /// <summary>
+    /// if objest postion moves out of the the y or x returns them inside the x or y on oppiset side
+    /// </summary>
     void Update()
     {
         if (transform.position.x > 98) transform.position = new Vector3(-96,transform.position.y,transform.position.z);
